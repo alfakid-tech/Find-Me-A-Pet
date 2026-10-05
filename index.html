@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Dog</title>
+</head>
+<body>
+    <h1>Find a Dog</h1>
+
+    <label for="age">Please enter the minimum age for the dog:</label>
+    <input type="number" id="age" min="0" step="any">
+    <button onclick="findDogs()">Find Dogs</button>
+
+    <div class="results"></div>
+
+    <script>
+        const allDogs = [
+            { dogName: "Andy (in foster)", breed: "Terrier, American Pit Bull", age: 6 },
+            { dogName: "Apollo", breed: "Terrier, Pit Bull", age: 4 },
+            { dogName: "Apollo James", breed: "Dalmatian", age: 9 },
+            { dogName: "Archie", breed: "Retriever, Labrador", age: 1 },
+            { dogName: "Barley", breed: "Terrier, Bull", age: 4 },
+            { dogName: "Basil", breed: "Terrier, Staffordshire Bull", age: 3 },
+            { dogName: "Bella", breed: "Siberian Husky", age: 8 },
+            { dogName: "Blastoise (in foster)", breed: "Terrier, Pit Bull", age: 6 },
+            { dogName: "Brooklyn", breed: "Terrier, American Staffordshire", age: 7 },
+            { dogName: "Bubby", breed: "Terrier", age: 7 }
+        ];
+
+        function findDogs() {
+            let input = document.querySelector("#age").value;
+            let age = Number(input);
+            let selectedDogs = [];
+            let output = "";
+
+            if (input === "" || age < 0) {
+                document.querySelector(".results").innerHTML = "Please enter an age of 0 or more.";
+                return;
+            }
+
+            allDogs.forEach(function(dog) {
+                if (dog.age > age) {
+                    selectedDogs.push(dog);
+                    output += `<p>${dog.dogName} - ${dog.breed} - ${dog.age} years</p>`;
+                }
+            });
+
+            if (selectedDogs.length === 0) {
+                output = "No dogs found.";
+            }
+
+            document.querySelector(".results").innerHTML = output;
+        }
+    </script>
+</body>
+</html>
